@@ -1,0 +1,30 @@
+.player{
+    display: flex;
+    flex-flow: column;
+    width: 200px;
+    margin: 10px auto; 
+    background-color: #e0c2c0;
+    text-align: center;
+}
+.player p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+.player div button {
+    margin: 2px;
+}
+.stavka {
+    width: 50%;
+    margin: 0 auto;
+}
+.stavki {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.win{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
