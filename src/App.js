@@ -191,8 +191,8 @@ function App() {
     <div className="App">
       <div className="btns">
         <button onClick={addOnePlayer}>+1 Игрок</button>
-        <button onClick={startMoney}>Начальные деньги</button>
         <button onClick={removeOnePlayer}>-1 Игрок</button>
+        <button onClick={startMoney}>Начальные деньги</button>
       </div>
 
       {players.map((el) => {
