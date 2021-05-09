@@ -10,6 +10,8 @@ function App() {
       money: 0,
       id: 1,
       stavka: 0,
+      winCoins: "",
+      loseCoins: "",
     },
   ]);
 
@@ -20,6 +22,8 @@ function App() {
         money: 0,
         id: playerNumber,
         stavka: 0,
+        winCoins: "",
+        loseCoins: "",
       },
     ]);
     playerNumber = playerNumber + 1;
@@ -120,8 +124,16 @@ function App() {
   const win = (item) => {
     const newArr = players.map((el) => {
       if (el.id === item.id) {
-        el.money = el.money + (el.stavka * 2);
+        el.money = el.money + el.stavka * 2;
         el.stavka = 0;
+        if(el.money > 50){
+          el.loseCoins = "";
+          el.winCoins = `↑${el.money - 50}`;
+        }else if (el.money <= 50) {
+          el.winCoins = "";
+          el.loseCoins = `↓${50 - el.money}`;
+        }
+
       }
       return el;
     });
@@ -132,6 +144,13 @@ function App() {
     const newArr = players.map((el) => {
       if (el.id === item.id) {
         el.stavka = 0;
+        if(el.money >= 50){
+          el.loseCoins = "";
+          el.winCoins = `↑${el.money - 50}`;
+        }else if (el.money < 50) {
+          el.winCoins = "";
+          el.loseCoins = `↓${50 - el.money}`;
+        }
       }
       return el;
     });
@@ -142,21 +161,39 @@ function App() {
   const twentyOne = (item) => {
     const newArr = players.map((el) => {
       if (el.id === item.id) {
-        el.money = el.money + (el.stavka * 2.5);
+        el.money = el.money + el.stavka * 2.5;
+        el.stavka = 0;
+        if(el.money >= 50){
+          el.loseCoins = "";
+          el.winCoins = `↑${el.money - 50}`;
+        }else if (el.money <= 50) {
+          el.winCoins = "";
+          el.loseCoins = `↓${50 - el.money}`;
+        }
+      }
+      return el;
+    });
+
+    setPlayers(newArr);
+  };
+
+  const odd = (item) => {
+    const newArr = players.map((el) => {
+      if (el.id === item.id) {
+        el.money = el.money + el.stavka;
         el.stavka = 0;
       }
       return el;
     });
 
     setPlayers(newArr);
-  }; 
-
+  };
   return (
     <div className="App">
       <div className="btns">
-        <button onClick={() => addOnePlayer(playerNumber)}>+1 player</button>
-        <button onClick={removeOnePlayer}>-1 player</button>
-        <button onClick={startMoney}>Start Money</button>
+        <button onClick={() => addOnePlayer(playerNumber)}>+1 Игрок</button>
+        <button onClick={startMoney}>Начальные деньги</button>
+        <button onClick={removeOnePlayer}>-1 Игрок</button>
       </div>
 
       {players.map((el) => {
@@ -174,6 +211,7 @@ function App() {
             plusOne={plusOne}
             lose={lose}
             twentyOne={twentyOne}
+            odd={odd}
           />
         );
       })}
